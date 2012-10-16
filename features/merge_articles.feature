@@ -9,7 +9,6 @@ Feature: Merge Articles
     And I am on the new article page
     When I fill in "article_title" with "foobar"
     And I fill in "article__body_and_extended_editor" with "foobar_content"
-    And I fill in "article_author" with "foobar_author"
     And I press "Publish"
     Then I should be on the admin content page
     When I go to the home page
@@ -28,6 +27,7 @@ Feature: Merge Articles
 
   Scenario: A non-admin cannot merge two articles
     Given I am on the edit article page for "foobar"
+    And I am logged in as a blog publisher
     Then I should not see "merge_with"
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
@@ -46,9 +46,41 @@ Feature: Merge Articles
   	And I press "Merge"
   	Then I should be on the admin content page
   	And I should see "foobar"
-  	Given I am on the edit article page for "foobar"
-  	Then the "author" field should contain "foobar_author"
+  	And I should see "admin"
 
-  Scenario: Comments on each of the two original articles need to all carry over and point to the new, merged article
+  Scenario: Comments on each of the two original articles need to all carry over and point to the new, merged article.
+  	Given I am on the show article page for "foobar"
+
+  	And I fill in "comment_author" with "foobar_author"
+  	And I fill in "comment_email" with "foobar_email"
+  	And I fill in "comment_url" with "foobar_url"
+  	And I fill in "comment_body" with "foobar_body"
+  	And I press "comment"
+
+  	And I am on the show article page for "helloworld"
+  	And I fill in "comment_author" with "helloworld_author"
+  	And I fill in "comment_email" with "helloworld_email"
+  	And I fill in "comment_url" with "helloworld_url"
+  	And I fill in "comment_body" with "helloworld_body"
+	And I press "comment"
+	
+	And I am on the edit article page for "foobar"  
+
+  	And I fill in "merge_with" with "4"
+  	And I press "Merge"
+  	Then I should be on the admin content page
+  	And I should see "foobar"
+
+  	Given I am on the feedback page for "foobar"
+  	
+  	Then I should see "foobar_body"
+  	And I should see "helloworld_body"
 
   Scenario: The title of the new article should be the title from either one of the merged articles
+  	Given I am on the edit article page for "foobar"
+  	And I fill in "merge_with" with "4"
+  	And I press "Merge"
+  	Then I should be on the admin content page
+  	And I should see "foobar"
+  	Given I am on the edit article page for "foobar"
+  	Then the "article_title" field should contain "foobar"

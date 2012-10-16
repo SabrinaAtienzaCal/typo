@@ -21,6 +21,10 @@ module NavigationHelpers
       '/admin/content/edit/' + Article.find_by_title($1).id.to_s
     when /^the article page for "([^"]*)"$/
       '/admin/content/edit/' + Article.find_by_title($1).id.to_s
+    when /^the show article page for "([^"]*)"$/
+      Article.find_by_title($1).permalink_url
+    when /^the feedback page for "([^"]*)"$/
+      '/admin/feedback/article/' + Article.find_by_title($1).id.to_s
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

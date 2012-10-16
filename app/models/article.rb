@@ -122,9 +122,26 @@ class Article < Content
 
   end
 
-  # merge_with is an instance method so no ".self" preceding it
+  # merge two articles into a single article containing contents of both
   def merge_with(other_article_id)
-    self.body = self.body + Article.find(other_article_id).body.to_s
+    @other_article = Article.find(other_article_id)
+    self.body = self.body + @other_article.body.to_s
+    
+    # make each comment of other article point to self.article by changing "id" 
+    @other_article.comments.each do |other_comment|
+      #p "OTHER_COMMENT BEFORE ALTERATION: "
+      #p other_comment
+      #p "SELF.COMMENTS BEFORE ALTERATION: "
+      #p self.comments
+      
+      other_comment.article_id = self.id
+      self.comments << other_comment
+
+      #p "OTHER_COMMENT AFTER ALTERATION: "
+      #p other_comment
+      #p "SELF.COMMENTS AFTER ALTERATION: "
+      #p self.comments
+    end
   end
 
   def year_url

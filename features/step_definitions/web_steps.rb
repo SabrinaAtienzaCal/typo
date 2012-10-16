@@ -55,6 +55,7 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
@@ -67,6 +68,8 @@ end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
+  # EXCELLENT FOR DEBUGGING
+  # p page.body
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
