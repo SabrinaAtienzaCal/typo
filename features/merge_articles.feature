@@ -27,7 +27,6 @@ Feature: Merge Articles
 
   Scenario: A non-admin cannot merge two articles
     Given I am on the edit article page for "foobar"
-    And I am logged in as a blog publisher
     Then I should not see "merge_with"
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles

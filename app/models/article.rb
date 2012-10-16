@@ -126,22 +126,14 @@ class Article < Content
   def merge_with(other_article_id)
     @other_article = Article.find(other_article_id)
     self.body = self.body + @other_article.body.to_s
-    
-    # make each comment of other article point to self.article by changing "id" 
+
     @other_article.comments.each do |other_comment|
-      #p "OTHER_COMMENT BEFORE ALTERATION: "
-      #p other_comment
-      #p "SELF.COMMENTS BEFORE ALTERATION: "
-      #p self.comments
-      
       other_comment.article_id = self.id
       self.comments << other_comment
 
-      #p "OTHER_COMMENT AFTER ALTERATION: "
-      #p other_comment
-      #p "SELF.COMMENTS AFTER ALTERATION: "
-      #p self.comments
+      Article.new(self)
     end
+    Article.delete(@other_article.id)
   end
 
   def year_url
