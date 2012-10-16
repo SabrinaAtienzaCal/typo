@@ -122,6 +122,11 @@ class Article < Content
 
   end
 
+  # merge_with is an instance method so no ".self" preceding it
+  def merge_with(other_article_id)
+    self.body = self.body + Article.find(other_article_id).body.to_s
+  end
+
   def year_url
     published_at.year.to_s
   end

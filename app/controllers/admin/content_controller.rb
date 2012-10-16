@@ -168,6 +168,8 @@ class Admin::ContentController < Admin::BaseController
       
       @article.state = "draft" if @article.draft
 
+      @article.merge_with(params[:merge][:merge_with]) unless params[:merge][:merge_with].blank?
+
       if @article.save
         destroy_the_draft unless @article.draft
         set_article_categories
