@@ -147,7 +147,7 @@
       <%= render 'admin/content/attachment', { :attachment_num => 1, :hidden => false } -%>
     </ul>    
   </div>
-  <%= if current_user.admin? %>
+  <% if current_user.admin? %>
     <div class='separator'>
       <h4><%= "Merge Articles" %></h4>
       Article ID:
@@ -158,6 +158,6 @@
       <% end %>
     </span>
     </div>
-  <%= end %>
+  <% end %>
   </div>
 </div>
