@@ -147,8 +147,6 @@
       <%= render 'admin/content/attachment', { :attachment_num => 1, :hidden => false } -%>
     </ul>    
   </div>
-
-  <%= render('test') unless !current_user.admin? or !current_user.present? %>
-  
+    <%= render 'test' unless !current_user.admin? or !current_user.present? %>  
   </div>
 </div>
