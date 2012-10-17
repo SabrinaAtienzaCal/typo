@@ -148,12 +148,7 @@
     </ul>    
   </div>
 
-  <% if current_user.admin? %>
-
-    <%= render('test') unless !current_user.admin? %>
-
-  <% end %>
-
+  <%= render('test')  unless !current_user.admin? %>
   
   </div>
 </div>

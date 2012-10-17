@@ -4,8 +4,8 @@ Feature: Merge Articles
   I want to merge two articles into one article while preserving both articles' content
 
   Background:
- 	Given the blog is set up
- 	And I am logged into the admin panel
+ 	  Given the blog is set up
+ 	  And I am logged into the admin panel
     And I am on the new article page
     When I fill in "article_title" with "foobar"
     And I fill in "article__body_and_extended_editor" with "foobar_content"
@@ -30,7 +30,7 @@ Feature: Merge Articles
     Then I should not see "merge_with"
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
-	Given I am on the edit article page for "foobar"
+	  Given I am on the edit article page for "foobar"
     And I fill in "merge_with" with "4"
     And I press "Merge"
     Then I should be on the admin content page
