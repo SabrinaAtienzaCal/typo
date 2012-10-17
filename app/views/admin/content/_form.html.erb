@@ -27,7 +27,7 @@
     <div class='clearfix'>
       Comments are <strong>enabled</strong> and trackbacks are <strong>disabled</strong> <a href="#" onclick="Element.toggle('conversation'); return false">Change</a>
       <ul class='inputs-list' id='conversation' style='display: none'>
-        <li>
+        <li>  
           <label for="article_allow_pings">
             <%= check_box 'article', 'allow_pings' %>
             <%= _("Allow trackbacks") %>
@@ -147,6 +147,6 @@
       <%= render 'admin/content/attachment', { :attachment_num => 1, :hidden => false } -%>
     </ul>    
   </div>
-    <%= render 'test' unless !current_user.admin? or !current_user.present? %>  
+    <%= render 'test' unless current_user.admin? and current_user.present? %>  
   </div>
 </div>
