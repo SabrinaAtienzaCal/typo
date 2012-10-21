@@ -223,6 +223,7 @@ class Admin::ContentController < Admin::BaseController
 
   def set_article_categories
     @article.categorizations.clear
+
     if params[:categories]
       Category.find(params[:categories]).each do |cat|
         @article.categories << cat
